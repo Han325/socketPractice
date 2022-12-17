@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="main">hey bro</h1>
+
+  </body>
+
+  <script>
+    number_one = document.getElementById("main");
+    var wsStart = "ws://";
+    var endpoint = wsStart + window.location.host + window.location.pathname;
+    var socket = new WebSocket(endpoint);
+    console.log(endpoint);
+
+    socket.onopen = function (e) {
+      console.log("open", e);
+      socket.send(1);
+    };
+
+    socket.onmessage = function (e) {
+      console.log("message", e);
+      number_one.innerHTML = e.data;
+      socket.send(1);
+    };
+  </script>
+</html>
